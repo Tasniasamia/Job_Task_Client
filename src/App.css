@@ -1,5 +1,5 @@
 #Task {
-max-width: 100%;
+/* max-width: 100%; */
 margin: 0 auto;
 padding: 2rem;
 background-image: url('https://img.freepik.com/free-photo/gradient-blue-abstract-background-smooth-dark-blue-with-black-vignette-studio_1258-68081.jpg?w=996&t=st=1690965520~exp=1690966120~hmac=caf5ff32f4fa8955dc3892e371f6ab2179921c63f7b6d7477d0663585e84c2fd');
@@ -8,5 +8,23 @@ background-size: cover;
 height: 100vh;
 
 }
+ul.nav li:hover{
+  background:rgba(0, 100, 80,0.3);
+  padding:5px;
+  
+}
 
-
+ul.nav li a:hover{
+  color:white!important;
+}
+@media(max-width:767px){
+  #sidebar{
+  margin-left:-1000px;
+  position: fixed;
+  z-index: 1;
+  top:0
+  }
+  #sidebar.active{
+  margin-left: 0;
+  }
+  }
