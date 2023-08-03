@@ -25,7 +25,7 @@ function App() {
           <Link to="/AddTask"className='ms-3 p-2 text-dark text-decoration-none mx-auto'>Add New Task</Link>
            
         </li>
-        <li className="nav-item mt-3">
+        <li className="nav-item mt-3 pb-3">
          <Link to="/TaskList"className='ms-3  p-2 text-dark text-decoration-none mx-auto'>Task List</Link>
            
         </li>

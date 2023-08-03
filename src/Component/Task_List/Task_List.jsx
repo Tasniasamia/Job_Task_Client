@@ -18,10 +18,19 @@ const[InputValue,setInputValue]=useState("");
     useEffect(()=>{
         fetch('http://localhost:6030/TasksCollection')
         .then(res=>res.json())
-        .then(data=>{setTask(data)})
-        .catch((error) => {
-            alert(error.message);
-             console.error('Error:', error.message);})
+        .then(data=>{setTask(data);
+        
+            if(data.error){
+                Swal.fire({
+                    icon: 'error',
+                    title: `${data.message}`,
+                    text: 'Something went wrong!',
+                    footer: '<a href="">Why do I have this issue?</a>'
+                  })
+            }
+        
+        })
+   
     },[])
     //deleteValue
     const deleltetask=(id)=>{
@@ -42,7 +51,18 @@ const[InputValue,setInputValue]=useState("");
                 showConfirmButton: false,
                 timer: 1500
               })
-        }})
+        }
+        if(data.error){
+            Swal.fire({
+                icon: 'error',
+                title: `${data.message}`,
+                text: 'Something went wrong!',
+                footer: '<a href="">Why do I have this issue?</a>'
+              })
+        }
+    
+    })
+      
     }
    //Update Status
 const updateStatus=(id)=>{
@@ -63,16 +83,16 @@ const updateStatus=(id)=>{
                 timer: 1500
               })
         }
-        else{
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Something went wrong!',
-                footer: '<a href="">Why do I have this issue?</a>'
-              })
-        }
-    
-    })
+      
+    if(data.error){
+        Swal.fire({
+            icon: 'error',
+            title: `${data.message}`,
+            text: 'Something went wrong!',
+            footer: '<a href="">Why do I have this issue?</a>'
+          })
+    }
+    }) 
 }
     return (
         <div className="table-responsive">
