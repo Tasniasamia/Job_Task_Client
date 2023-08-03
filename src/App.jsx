@@ -7,9 +7,9 @@ function App() {
   return (
     <div id="Task"className='w-full'>
     <div className="container mx-auto h-auto  w-full">
-<div className="row flex-nowrap h-100"style={{background:"#f8f8f8"}}>
-  <div className=" col-8 col-md-3 h-100 z-1  sidebar"id="sidebar"style={{background:"white"}}>
-    <div className="flex-wrap">
+<div className="row flex-nowrap h-auto "style={{background:"#f8f8f8"}}>
+  <div className=" col-8 col-md-3 h-auto z-1  sidebar"id="sidebar"style={{background:"white"}}>
+    <div className="flex-wrap ">
         <div className="d-flex justify-content-start align-items-center ">
    
 <Link to="/"style={{color:"#27d7a1",textDecoration:"none",textTransform:"uppercase"}}>               

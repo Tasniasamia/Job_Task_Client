@@ -10,41 +10,45 @@ const Add_Task = () => {
         reset,
         watch,
         formState: { errors },
-      } = useForm()
-    
-      const onSubmit = (data) => {console.log(data);
-    
-    const dataall={
-        title:data.title,
-        decription:data.descript,
-        status:data.status
-    }
-    console.log(dataall);
-   
-    fetch('https://my-first-task-server.vercel.app/Tasks',{
-        method:"POST",
-        headers:{
-            "content-type": `application/json`
-          },
+      } = useForm();
       
-        body:JSON.stringify(dataall)
-      }).then(res=>res.json())
-      .then((data)=>{
+      const onSubmit = (data) => {
         console.log(data);
-        if(data.insertedId){
-            reset();
-            Swal.fire({
+      
+        const dataall = {
+          title: data.title,
+          decription: data.descript,
+          status: data.status,
+        };
+        console.log(dataall);
+      
+        fetch('https://my-first-task-server.vercel.app/Tasks', {
+          method: "POST",
+          headers: {
+            "content-type": `application/json`,
+          },
+          body: JSON.stringify(dataall),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.insertedId) {
+              reset();
+              Swal.fire({
                 position: 'top-end',
                 icon: 'success',
                 title: 'Task has been added into Database',
                 showConfirmButton: false,
-                timer: 1500
-              })
-        }
-      })
-      .catch((error) => {
-       alert(error.message);
-        console.error('Error:', error.message);})
+                timer: 1500,
+              });
+            }
+          })
+        //   .catch((error) => {
+        //     console.error('Error:', error);
+        //     // Handle the error here (e.g., show an error message to the user).
+        //   });
+      
+    
     
     }
     return (
