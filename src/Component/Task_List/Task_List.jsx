@@ -16,7 +16,7 @@ const[InputValue,setInputValue]=useState("");
     //getTask
     const[Task,setTask]=useState([]);
     useEffect(()=>{
-        fetch('http://localhost:6030/TasksCollection')
+        fetch('https://my-first-task-server.vercel.app/TasksCollection')
         .then(res=>res.json())
         .then(data=>{setTask(data);
         
@@ -36,7 +36,7 @@ const[InputValue,setInputValue]=useState("");
     const deleltetask=(id)=>{
         const taskall=Task.filter(index=>index._id!==id);
         setTask(taskall);
-        fetch(`http://localhost:6030/Taskdelete/${id}`,{
+        fetch(`https://my-first-task-server.vercel.app/Taskdelete/${id}`,{
             method:"DELETE",
             headers:{
                 "content-type": `application/json`            }
@@ -66,7 +66,7 @@ const[InputValue,setInputValue]=useState("");
     }
    //Update Status
 const updateStatus=(id)=>{
-    fetch(`http://localhost:6030/StatusUpdate/${id}`,{
+    fetch(`https://my-first-task-server.vercel.app/StatusUpdate/${id}`,{
         method:"PATCH",
         headers:{
             "content-type":"application/json"

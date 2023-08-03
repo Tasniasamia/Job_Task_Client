@@ -21,7 +21,7 @@ const Add_Task = () => {
     }
     console.log(dataall);
    
-    fetch('http://localhost:6030/Tasks',{
+    fetch('https://my-first-task-server.vercel.app/Tasks',{
         method:"POST",
         headers:{
             "content-type": `application/json`
