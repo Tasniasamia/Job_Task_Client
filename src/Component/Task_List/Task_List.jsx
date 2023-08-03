@@ -1,6 +1,57 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import useTasks from '../Hooks/useTasks';
+import Swal from 'sweetalert2';
 
 const Task_List = () => {
+    const[status,setStatus]=useState(null)
+const[InputValue,setInputValue]=useState("");
+  // Function to handle form submission
+//   const handleSubmit = (event) => {
+//     event.preventDefault();
+//     const inputValue = inputRef.current.value;
+//     setStatus(inputValue);
+//     console.log('Input value:', inputValue);
+//   };
+
+    //getTask
+    const[Task,setTask]=useState([]);
+    useEffect(()=>{
+        fetch('http://localhost:6030/TasksCollection')
+        .then(res=>res.json())
+        .then(data=>{setTask(data)})
+    },[])
+    //deleteValue
+    const deleltetask=(id)=>{
+        const taskall=Task.filter(index=>index._id!==id);
+        setTask(taskall);
+        fetch(`http://localhost:6030/Taskdelete/${id}`,{
+            method:"DELETE",
+            headers:{
+                "content-type": `application/json`            }
+        }).then(res=>res.json())
+        .then(data=>{console.log(data);
+        if(data.deletedCount>0){
+  
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Successfully Deleted',
+                showConfirmButton: false,
+                timer: 1500
+              })
+        }})
+    }
+   //Update Status
+const updateStatus=(id)=>{
+    fetch(`http://localhost:6030/StatusUpdate/${id}`,{
+        method:"PATCH",
+        headers:{
+            "content-type":"application/json"
+        },
+        body:JSON.stringify({status:InputValue})
+    }).then(res=>res.json())
+    .then(data=>{console.log(data)})
+}
     return (
         <div className="table-responsive">
             <table className="table caption-top">
@@ -11,17 +62,40 @@ const Task_List = () => {
       <th scope="col">Title</th>
       <th scope="col">Description</th>
       <th scope="col">Status</th>
+      <th scope="col">Status Update</th>
+
       <th scope="col">Delete</th>
 
     </tr>
   </thead>
   <tbody>
-    <tr>
+
+    {
+        Task.map(index=><tr key={index._id}>
+
+
+      <th scope="row">1</th>
+      <td>{index.title}</td>
+      <td>{index.decription}</td>
+      <td >
+      <textarea id="w3review" name="w3review" rows="1" cols="8"defaultValue={index.status} onChange={(e) => setInputValue(e.target.value)}>
+
+</textarea>
+      
+      </td>
+      <td onClick={()=>updateStatus(index._id)}>  <button  className="btn "style={{background:"rgba(0, 100, 80)",color:"white"}}>Update </button></td>
+
+      <td>  <button onClick={()=>{deleltetask(index._id)}} className="btn "style={{background:"rgba(0, 100, 80)",color:"white"}}>Delete</button></td>
+
+
+        </tr>)
+    }
+    {/* <tr>
       <th scope="row">1</th>
       <td>Mark</td>
       <td>Otto</td>
       <td>@mdo</td>
-    </tr>
+    </tr> */}
     {/* <tr>
       <th scope="row">2</th>
       <td>Jacob</td>
