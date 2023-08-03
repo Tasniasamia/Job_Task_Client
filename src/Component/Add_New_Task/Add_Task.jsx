@@ -42,6 +42,9 @@ const Add_Task = () => {
               })
         }
       })
+      .catch((error) => {
+       alert(error.message);
+        console.error('Error:', error.message);})
     
     }
     return (

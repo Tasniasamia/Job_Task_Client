@@ -19,6 +19,9 @@ const[InputValue,setInputValue]=useState("");
         fetch('http://localhost:6030/TasksCollection')
         .then(res=>res.json())
         .then(data=>{setTask(data)})
+        .catch((error) => {
+            alert(error.message);
+             console.error('Error:', error.message);})
     },[])
     //deleteValue
     const deleltetask=(id)=>{
@@ -50,7 +53,26 @@ const updateStatus=(id)=>{
         },
         body:JSON.stringify({status:InputValue})
     }).then(res=>res.json())
-    .then(data=>{console.log(data)})
+    .then(data=>{console.log(data);
+        if(data.modifiedCount>0){
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Successfully Updated',
+                showConfirmButton: false,
+                timer: 1500
+              })
+        }
+        else{
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+                footer: '<a href="">Why do I have this issue?</a>'
+              })
+        }
+    
+    })
 }
     return (
         <div className="table-responsive">
@@ -71,10 +93,10 @@ const updateStatus=(id)=>{
   <tbody>
 
     {
-        Task.map(index=><tr key={index._id}>
+        Task.map((index,data)=><tr key={index._id}>
 
 
-      <th scope="row">1</th>
+      <th scope="row">{data+1}</th>
       <td>{index.title}</td>
       <td>{index.decription}</td>
       <td >
