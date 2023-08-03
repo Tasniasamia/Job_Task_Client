@@ -6,8 +6,8 @@ function App() {
 
   return (
     <div id="Task"className='w-full'>
-    <div className="container mx-auto  w-full"style={{height:"500px"}}>
-<div className="row flex-nowrap "style={{height:"500px",background:"#f8f8f8"}}>
+    <div className="container mx-auto h-auto  w-full">
+<div className="row flex-nowrap h-100"style={{background:"#f8f8f8"}}>
   <div className=" col-8 col-md-3 h-100 z-1  sidebar"id="sidebar"style={{background:"white"}}>
     <div className="flex-wrap">
         <div className="d-flex justify-content-start align-items-center ">
